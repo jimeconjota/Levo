@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico de Liderazgo – Levo by UP Company</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+--bg: #0d0b1a;
+--bg2: #13102a;
+--bg3: #1a1635;
+--violet: #7c3aed;
+--violet-light: #a855f7;
+--violet-glow: rgba(124,58,237,0.25);
+--violet-border: rgba(124,58,237,0.4);
+--white: #ffffff;
+--white-80: rgba(255,255,255,0.8);
+--white-50: rgba(255,255,255,0.5);
+--white-20: rgba(255,255,255,0.2);
+--white-10: rgba(255,255,255,0.08);
+--white-05: rgba(255,255,255,0.04);
+--green: #10b981;
+--green-bg: rgba(16,185,129,0.12);
+--red: #f87171;
+--red-bg: rgba(248,113,113,0.12);
+--radius: 14px;
+--radius-sm: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+font-family: 'DM Sans', sans-serif;
+background: var(--bg);
+color: var(--white);
+min-height: 100vh;
+font-size: 16px;
+line-height: 1.6;
+overflow-x: hidden;
+}
+
+/* ── FONDO ANIMADO ── */
+.bg-orb {
+position: fixed; border-radius: 50%;
+filter: blur(80px); pointer-events: none; z-index: 0;
+}
+.bg-orb-1 {
+width: 600px; height: 600px;
+background: radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 70%);
+top: -200px; left: -150px;
+animation: drift1 18s ease-in-out infinite;
+}
+.bg-orb-2 {
+width: 400px; height: 400px;
+background: radial-gradient(circle, rgba(168,85,247,0.12) 0%, transparent 70%);
+bottom: -100px; right: -100px;
+animation: drift2 22s ease-in-out infinite;
+}
+@keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(60px,40px)} }
+@keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,-30px)} }
+
+/* ── LAYOUT ── */
+.wrap {
+position: relative; z-index: 1;
+max-width: 680px;
+margin: 0 auto;
+padding: 48px 20px 80px;
+}
+
+/* ── HEADER ── */
+.header { text-align: center; margin-bottom: 48px; }
+.header-badge {
+display: inline-flex; align-items: center; gap: 8px;
+font-size: 11px; font-weight: 600; letter-spacing: 0.16em;
+text-transform: uppercase; color: var(--violet-light);
+border: 1px solid var(--violet-border);
+background: var(--violet-glow);
+padding: 6px 16px; border-radius: 100px;
+margin-bottom: 24px;
+}
+.header-badge::before {
+content: ''; width: 6px; height: 6px;
+background: var(--violet-light); border-radius: 50%;
+animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+.header h1 {
+font-family: 'Syne', sans-serif;
+font-size: clamp(32px, 6vw, 52px);
+font-weight: 800;
+line-height: 1.05;
+letter-spacing: -0.02em;
+margin-bottom: 16px;
+}
+.header h1 span { color: var(--violet-light); }
+.header p {
+font-size: 16px; color: var(--white-50);
+font-weight: 300; max-width: 460px; margin: 0 auto;
+}
+
+/* ── PROGRESS ── */
+.progress-wrap { margin-bottom: 36px; }
+.progress-track {
+height: 2px; background: var(--white-10);
+border-radius: 100px; overflow: hidden;
+}
+.progress-fill {
+height: 100%; background: linear-gradient(90deg, var(--violet), var(--violet-light));
+border-radius: 100px; transition: width 0.5s ease;
+}
+.progress-label {
+display: flex; justify-content: space-between;
+font-size: 11px; color: var(--white-50);
+margin-top: 8px; letter-spacing: 0.06em;
+}
+
+/* ── CARD ── */
+.card {
+background: var(--bg2);
+border: 1px solid var(--white-10);
+border-radius: var(--radius);
+padding: 32px;
+margin-bottom: 20px;
+transition: border-color 0.3s;
+}
+.card:hover { border-color: var(--white-20); }
+
+/* ── DIM HEADER ── */
+.dim-header {
+display: flex; align-items: flex-start; gap: 16px;
+margin-bottom: 28px; padding-bottom: 24px;
+border-bottom: 1px solid var(--white-10);
+}
+.dim-icon {
+width: 44px; height: 44px; border-radius: 10px;
+display: flex; align-items: center; justify-content: center;
+font-size: 20px; flex-shrink: 0;
+border: 1px solid var(--white-10);
+}
+.dim-icon.d1 { background: rgba(124,58,237,0.2); }
+.dim-icon.d2 { background: rgba(16,185,129,0.15); }
+.dim-icon.d3 { background: rgba(251,191,36,0.12); }
+.dim-meta h2 {
+font-family: 'Syne', sans-serif;
+font-size: 20px; font-weight: 700;
+margin-bottom: 4px;
+}
+.dim-meta p { font-size: 13px; color: var(--white-50); font-weight: 300; }
+
+/* ── SECCIÓN LABEL ── */
+.section-label {
+font-size: 10px; font-weight: 600;
+letter-spacing: 0.14em; text-transform: uppercase;
+color: var(--white-50); margin-bottom: 20px;
+display: flex; align-items: center; gap: 10px;
+}
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--white-10); }
+
+/* ── FORM ── */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 520px) { .form-grid { grid-template-columns: 1fr; } }
+.form-grid .full { grid-column: 1 / -1; }
+
+.field label {
+display: block; font-size: 12px; font-weight: 500;
+color: var(--white-50); margin-bottom: 7px;
+letter-spacing: 0.04em;
+}
+.field input, .field select {
+width: 100%; padding: 12px 16px;
+background: var(--white-05);
+border: 1px solid var(--white-10);
+border-radius: var(--radius-sm);
+font-family: 'DM Sans', sans-serif;
+font-size: 15px; color: var(--white);
+outline: none; transition: border-color 0.2s, background 0.2s;
+-webkit-appearance: none;
+}
+.field input::placeholder { color: var(--white-20); }
+.field input:focus, .field select:focus {
+border-color: var(--violet-border);
+background: rgba(124,58,237,0.08);
+}
+.field select { color: var(--white-80); cursor: pointer; }
+.field select option { background: #1a1635; color: white; }
+
+/* ── MOMENTO SELECTOR ── */
+.momento-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
+.momento-opt { position: relative; }
+.momento-opt input { position: absolute; opacity: 0; width: 0; height: 0; }
+.momento-opt label {
+display: flex; flex-direction: column; gap: 4px;
+padding: 16px 18px;
+background: var(--white-05);
+border: 1px solid var(--white-10);
+border-radius: var(--radius-sm);
+cursor: pointer; transition: all 0.2s;
+}
+.momento-opt label .m-title {
+font-size: 14px; font-weight: 600; color: var(--white);
+}
+.momento-opt label .m-sub {
+font-size: 12px; color: var(--white-50);
+}
+.momento-opt input:checked + label {
+border-color: var(--violet);
+background: var(--violet-glow);
+}
+.momento-opt label:hover { border-color: var(--white-20); }
+
+/* ── PREGUNTA ── */
+.question {
+margin-bottom: 28px; padding-bottom: 28px;
+border-bottom: 1px solid var(--white-10);
+}
+.question:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.question-num {
+font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+text-transform: uppercase; color: var(--violet-light);
+margin-bottom: 8px;
+}
+.question-text {
+font-size: 15px; color: var(--white-80);
+margin-bottom: 18px; line-height: 1.55;
+}
+
+/* ── ESCALA ── */
+.scale { display: flex; gap: 8px; }
+.scale-opt { flex: 1; position: relative; }
+.scale-opt input { position: absolute; opacity: 0; width: 0; height: 0; }
+.scale-opt label {
+display: flex; flex-direction: column; align-items: center; gap: 5px;
+padding: 10px 4px;
+background: var(--white-05);
+border: 1px solid var(--white-10);
+border-radius: var(--radius-sm);
+cursor: pointer; transition: all 0.2s;
+}
+.scale-opt label .num {
+font-family: 'Syne', sans-serif;
+font-size: 17px; font-weight: 700;
+color: var(--white-50); transition: color 0.2s;
+}
+.scale-opt label .desc {
+font-size: 9px; color: var(--white-20);
+text-align: center; line-height: 1.2; display: none;
+letter-spacing: 0.04em;
+}
+.scale-opt:first-child label .desc,
+.scale-opt:last-child label .desc { display: block; }
+.scale-opt label:hover { border-color: var(--white-20); background: var(--white-10); }
+
+.dim1 .scale-opt input:checked + label { border-color: var(--violet); background: var(--violet-glow); }
+.dim1 .scale-opt input:checked + label .num { color: var(--violet-light); }
+.dim2 .scale-opt input:checked + label { border-color: var(--green); background: var(--green-bg); }
+.dim2 .scale-opt input:checked + label .num { color: var(--green); }
+.dim3 .scale-opt input:checked + label { border-color: #fbbf24; background: rgba(251,191,36,0.1); }
+.dim3 .scale-opt input:checked + label .num { color: #fbbf24; }
+
+/* ── NAV ── */
+.nav {
+display: flex; justify-content: space-between;
+align-items: center; margin-top: 28px; gap: 12px;
+}
+.btn {
+padding: 13px 28px; border-radius: var(--radius-sm);
+font-family: 'DM Sans', sans-serif;
+font-size: 15px; font-weight: 500;
+cursor: pointer; transition: all 0.2s; border: none;
+letter-spacing: 0.02em;
+}
+.btn-ghost {
+background: transparent; color: var(--white-50);
+border: 1px solid var(--white-10);
+}
+.btn-ghost:hover { border-color: var(--white-20); color: var(--white-80); }
+.btn-primary {
+background: var(--white); color: var(--bg);
+font-weight: 600; min-width: 160px;
+}
+.btn-primary:hover { background: rgba(255,255,255,0.9); transform: translateY(-1px); }
+.btn-violet {
+background: var(--violet); color: white;
+font-weight: 600; min-width: 200px;
+box-shadow: 0 0 24px var(--violet-glow);
+}
+.btn-violet:hover { background: #6d28d9; transform: translateY(-1px); box-shadow: 0 0 32px rgba(124,58,237,0.4); }
+
+/* ── ERROR ── */
+.error-msg {
+background: var(--red-bg); border: 1px solid rgba(248,113,113,0.3);
+border-radius: var(--radius-sm); padding: 12px 16px;
+font-size: 13px; color: var(--red); margin-top: 16px; display: none;
+}
+
+/* ── LOADING ── */
+.loading-screen { text-align: center; padding: 80px 20px; }
+.loading-ring {
+width: 52px; height: 52px;
+border: 2px solid var(--white-10);
+border-top-color: var(--violet-light);
+border-radius: 50%;
+animation: spin 0.8s linear infinite;
+margin: 0 auto 28px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-screen h3 {
+font-family: 'Syne', sans-serif;
+font-size: 22px; font-weight: 700; margin-bottom: 8px;
+}
+.loading-screen p { color: var(--white-50); font-size: 14px; }
+.dots span { display: inline-block; animation: bop 1.2s infinite; }
+.dots span:nth-child(2) { animation-delay: 0.2s; }
+.dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bop { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} }
+
+/* ── RESULTADO ── */
+.result-top {
+background: linear-gradient(135deg, #1a1635 0%, #0f0c24 100%);
+border: 1px solid var(--violet-border);
+border-radius: var(--radius);
+padding: 36px 32px 28px;
+margin-bottom: 2px;
+position: relative; overflow: hidden;
+}
+.result-top::before {
+content: '';
+position: absolute; top: -60px; right: -60px;
+width: 200px; height: 200px;
+background: radial-gradient(circle, var(--violet-glow) 0%, transparent 70%);
+border-radius: 50%;
+}
+.result-tag {
+font-size: 10px; font-weight: 600; letter-spacing: 0.16em;
+text-transform: uppercase; color: var(--violet-light);
+margin-bottom: 12px; opacity: 0.8;
+}
+.result-nombre {
+font-family: 'Syne', sans-serif;
+font-size: 26px; font-weight: 800; margin-bottom: 4px;
+}
+.result-fecha { font-size: 13px; color: var(--white-50); margin-bottom: 24px; }
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico de Liderazgo – Levo by UP Company</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0b1a;
+  --bg2: #13102a;
+  --bg3: #1a1635;
+  --violet: #7c3aed;
+  --violet-light: #a855f7;
+  --violet-glow: rgba(124,58,237,0.25);
+  --violet-border: rgba(124,58,237,0.4);
+  --white: #ffffff;
+  --white-80: rgba(255,255,255,0.8);
+  --white-50: rgba(255,255,255,0.5);
+  --white-20: rgba(255,255,255,0.2);
+  --white-10: rgba(255,255,255,0.08);
+  --white-05: rgba(255,255,255,0.04);
+  --green: #10b981;
+  --green-bg: rgba(16,185,129,0.12);
+  --red: #f87171;
+  --red-bg: rgba(248,113,113,0.12);
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--white);
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── FONDO ANIMADO ── */
+.bg-orb {
+  position: fixed; border-radius: 50%;
+  filter: blur(80px); pointer-events: none; z-index: 0;
+}
+.bg-orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 70%);
+  top: -200px; left: -150px;
+  animation: drift1 18s ease-in-out infinite;
+}
+.bg-orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(168,85,247,0.12) 0%, transparent 70%);
+  bottom: -100px; right: -100px;
+  animation: drift2 22s ease-in-out infinite;
+}
+@keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(60px,40px)} }
+@keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,-30px)} }
+
+/* ── LAYOUT ── */
+.wrap {
+  position: relative; z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 48px 20px 80px;
+}
+
+/* ── HEADER ── */
+.header { text-align: center; margin-bottom: 48px; }
+.header-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--violet-light);
+  border: 1px solid var(--violet-border);
+  background: var(--violet-glow);
+  padding: 6px 16px; border-radius: 100px;
+  margin-bottom: 24px;
+}
+.header-badge::before {
+  content: ''; width: 6px; height: 6px;
+  background: var(--violet-light); border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+.header h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(32px, 6vw, 52px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.header h1 span { color: var(--violet-light); }
+.header p {
+  font-size: 16px; color: var(--white-50);
+  font-weight: 300; max-width: 460px; margin: 0 auto;
+}
+
+/* ── PROGRESS ── */
+.progress-wrap { margin-bottom: 36px; }
+.progress-track {
+  height: 2px; background: var(--white-10);
+  border-radius: 100px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--violet), var(--violet-light));
+  border-radius: 100px; transition: width 0.5s ease;
+}
+.progress-label {
+  display: flex; justify-content: space-between;
+  font-size: 11px; color: var(--white-50);
+  margin-top: 8px; letter-spacing: 0.06em;
+}
+
+/* ── CARD ── */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--white-10);
+  border-radius: var(--radius);
+  padding: 32px;
+  margin-bottom: 20px;
+  transition: border-color 0.3s;
+}
+.card:hover { border-color: var(--white-20); }
+
+/* ── DIM HEADER ── */
+.dim-header {
+  display: flex; align-items: flex-start; gap: 16px;
+  margin-bottom: 28px; padding-bottom: 24px;
+  border-bottom: 1px solid var(--white-10);
+}
+.dim-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+  border: 1px solid var(--white-10);
+}
+.dim-icon.d1 { background: rgba(124,58,237,0.2); }
+.dim-icon.d2 { background: rgba(16,185,129,0.15); }
+.dim-icon.d3 { background: rgba(251,191,36,0.12); }
+.dim-meta h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px; font-weight: 700;
+  margin-bottom: 4px;
+}
+.dim-meta p { font-size: 13px; color: var(--white-50); font-weight: 300; }
+
+/* ── SECCIÓN LABEL ── */
+.section-label {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--white-50); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--white-10); }
+
+/* ── FORM ── */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 520px) { .form-grid { grid-template-columns: 1fr; } }
+.form-grid .full { grid-column: 1 / -1; }
+
+.field label {
+  display: block; font-size: 12px; font-weight: 500;
+  color: var(--white-50); margin-bottom: 7px;
+  letter-spacing: 0.04em;
+}
+.field input, .field select {
+  width: 100%; padding: 12px 16px;
+  background: var(--white-05);
+  border: 1px solid var(--white-10);
+  border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px; color: var(--white);
+  outline: none; transition: border-color 0.2s, background 0.2s;
+  -webkit-appearance: none;
+}
+.field input::placeholder { color: var(--white-20); }
+.field input:focus, .field select:focus {
+  border-color: var(--violet-border);
+  background: rgba(124,58,237,0.08);
+}
+.field select { color: var(--white-80); cursor: pointer; }
+.field select option { background: #1a1635; color: white; }
+
+/* ── MOMENTO SELECTOR ── */
+.momento-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
+.momento-opt { position: relative; }
+.momento-opt input { position: absolute; opacity: 0; width: 0; height: 0; }
+.momento-opt label {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 16px 18px;
+  background: var(--white-05);
+  border: 1px solid var(--white-10);
+  border-radius: var(--radius-sm);
+  cursor: pointer; transition: all 0.2s;
+}
+.momento-opt label .m-title {
+  font-size: 14px; font-weight: 600; color: var(--white);
+}
+.momento-opt label .m-sub {
+  font-size: 12px; color: var(--white-50);
+}
+.momento-opt input:checked + label {
+  border-color: var(--violet);
+  background: var(--violet-glow);
+}
+.momento-opt label:hover { border-color: var(--white-20); }
+
+/* ── PREGUNTA ── */
+.question {
+  margin-bottom: 28px; padding-bottom: 28px;
+  border-bottom: 1px solid var(--white-10);
+}
+.question:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.question-num {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--violet-light);
+  margin-bottom: 8px;
+}
+.question-text {
+  font-size: 15px; color: var(--white-80);
+  margin-bottom: 18px; line-height: 1.55;
+}
+
+/* ── ESCALA ── */
+.scale { display: flex; gap: 8px; }
+.scale-opt { flex: 1; position: relative; }
+.scale-opt input { position: absolute; opacity: 0; width: 0; height: 0; }
+.scale-opt label {
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  padding: 10px 4px;
+  background: var(--white-05);
+  border: 1px solid var(--white-10);
+  border-radius: var(--radius-sm);
+  cursor: pointer; transition: all 0.2s;
+}
+.scale-opt label .num {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px; font-weight: 700;
+  color: var(--white-50); transition: color 0.2s;
+}
+.scale-opt label .desc {
+  font-size: 9px; color: var(--white-20);
+  text-align: center; line-height: 1.2; display: none;
+  letter-spacing: 0.04em;
+}
+.scale-opt:first-child label .desc,
+.scale-opt:last-child label .desc { display: block; }
+.scale-opt label:hover { border-color: var(--white-20); background: var(--white-10); }
+
+.dim1 .scale-opt input:checked + label { border-color: var(--violet); background: var(--violet-glow); }
+.dim1 .scale-opt input:checked + label .num { color: var(--violet-light); }
+.dim2 .scale-opt input:checked + label { border-color: var(--green); background: var(--green-bg); }
+.dim2 .scale-opt input:checked + label .num { color: var(--green); }
+.dim3 .scale-opt input:checked + label { border-color: #fbbf24; background: rgba(251,191,36,0.1); }
+.dim3 .scale-opt input:checked + label .num { color: #fbbf24; }
+
+/* ── NAV ── */
+.nav {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-top: 28px; gap: 12px;
+}
+.btn {
+  padding: 13px 28px; border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s; border: none;
+  letter-spacing: 0.02em;
+}
+.btn-ghost {
+  background: transparent; color: var(--white-50);
+  border: 1px solid var(--white-10);
+}
+.btn-ghost:hover { border-color: var(--white-20); color: var(--white-80); }
+.btn-primary {
+  background: var(--white); color: var(--bg);
+  font-weight: 600; min-width: 160px;
+}
+.btn-primary:hover { background: rgba(255,255,255,0.9); transform: translateY(-1px); }
+.btn-violet {
+  background: var(--violet); color: white;
+  font-weight: 600; min-width: 200px;
+  box-shadow: 0 0 24px var(--violet-glow);
+}
+.btn-violet:hover { background: #6d28d9; transform: translateY(-1px); box-shadow: 0 0 32px rgba(124,58,237,0.4); }
+
+/* ── ERROR ── */
+.error-msg {
+  background: var(--red-bg); border: 1px solid rgba(248,113,113,0.3);
+  border-radius: var(--radius-sm); padding: 12px 16px;
+  font-size: 13px; color: var(--red); margin-top: 16px; display: none;
+}
+
+/* ── LOADING ── */
+.loading-screen { text-align: center; padding: 80px 20px; }
+.loading-ring {
+  width: 52px; height: 52px;
+  border: 2px solid var(--white-10);
+  border-top-color: var(--violet-light);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 28px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-screen h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px; font-weight: 700; margin-bottom: 8px;
+}
+.loading-screen p { color: var(--white-50); font-size: 14px; }
+.dots span { display: inline-block; animation: bop 1.2s infinite; }
+.dots span:nth-child(2) { animation-delay: 0.2s; }
+.dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bop { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} }
+
+/* ── RESULTADO ── */
+.result-top {
+  background: linear-gradient(135deg, #1a1635 0%, #0f0c24 100%);
+  border: 1px solid var(--violet-border);
+  border-radius: var(--radius);
+  padding: 36px 32px 28px;
+  margin-bottom: 2px;
+  position: relative; overflow: hidden;
+}
+.result-top::before {
+  content: '';
+  position: absolute; top: -60px; right: -60px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, var(--violet-glow) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.result-tag {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--violet-light);
+  margin-bottom: 12px; opacity: 0.8;
+}
+.result-nombre {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px; font-weight: 800; margin-bottom: 4px;
+}
+.result-fecha { font-size: 13px; color: var(--white-50); margin-bottom: 24px; }
+
+.perfil-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--violet-glow);
+  border: 1px solid var(--violet-border);
+  border-radius: 100px;
+  padding: 8px 18px;
+  font-size: 14px; font-weight: 600;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.perfil-sub { font-size: 13px; color: var(--white-50); font-weight: 300; }
+
+/* ── SCORES ── */
+.scores-row {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  border: 1px solid var(--white-10);
+  border-radius: var(--radius);
+  overflow: hidden; margin-bottom: 2px;
+}
+@media (max-width: 480px) { .scores-row { grid-template-columns: 1fr; } }
+.score-cell {
+  padding: 18px 16px; text-align: center;
+  background: var(--bg2);
+  border-right: 1px solid var(--white-10);
+}
+.score-cell:last-child { border-right: none; }
+.score-cell .sc-name {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--white-50); margin-bottom: 8px;
+}
+.score-cell .sc-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 36px; font-weight: 800; line-height: 1;
+}
+.score-cell.d1 .sc-val { color: var(--violet-light); }
+.score-cell.d2 .sc-val { color: var(--green); }
+.score-cell.d3 .sc-val { color: #fbbf24; }
+.sbar { height: 3px; background: var(--white-10); border-radius: 100px; overflow: hidden; margin-top: 10px; }
+.sbar-fill { height: 100%; border-radius: 100px; transition: width 1.2s ease; }
+.d1 .sbar-fill { background: var(--violet-light); }
+.d2 .sbar-fill { background: var(--green); }
+.d3 .sbar-fill { background: #fbbf24; }
+
+/* ── INFORME ── */
+.result-body {
+  background: var(--bg2);
+  border: 1px solid var(--white-10);
+  border-radius: var(--radius);
+  padding: 32px;
+  margin-bottom: 20px;
+}
+.result-body h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px; font-weight: 700;
+  color: var(--white);
+  margin: 28px 0 12px;
+  padding-top: 28px;
+  border-top: 1px solid var(--white-10);
+  letter-spacing: 0.01em;
+}
+.result-body h3:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+.result-body p { color: var(--white-80); margin-bottom: 12px; font-size: 15px; line-height: 1.75; }
+.result-body ul { padding-left: 0; margin-bottom: 12px; list-style: none; }
+.result-body li {
+  color: var(--white-80); font-size: 15px;
+  margin-bottom: 10px; line-height: 1.6;
+  padding-left: 20px; position: relative;
+}
+.result-body li::before {
+  content: '→'; position: absolute; left: 0;
+  color: var(--violet-light); font-size: 13px;
+}
+.result-body strong { color: var(--white); font-weight: 600; }
+
+/* ── NOTICE ── */
+.notice {
+  background: var(--green-bg);
+  border: 1px solid rgba(16,185,129,0.25);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px; font-size: 13px;
+  color: var(--green);
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 24px;
+}
+.momento-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 12px; border-radius: 100px;
+  margin-bottom: 20px;
+}
+.momento-tag.inicio { background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
+.momento-tag.cierre { background: var(--violet-glow); color: var(--violet-light); border: 1px solid var(--violet-border); }
+
+/* ── SCREEN ── */
+.screen { display: none; }
+.screen.active { display: block; }
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; color: black; }
+  .bg-orb { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-orb bg-orb-1"></div>
+<div class="bg-orb bg-orb-2"></div>
+
+<div class="wrap">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-badge">Levo · UP Company</div>
+  <h1>Diagnóstico de<br><span>Liderazgo</span></h1>
+  <p>Una foto honesta del lugar desde donde liderás hoy. No hay respuestas correctas ni incorrectas.</p>
+</div>
+
+<!-- ══ S0: DATOS ══ -->
+<div id="s0" class="screen active">
+  <div class="card">
+    <div class="section-label">Tus datos</div>
+    <div class="form-grid">
+      <div class="field"><label>Nombre *</label><input type="text" id="f-nombre" placeholder="Tu nombre"></div>
+      <div class="field"><label>Apellido *</label><input type="text" id="f-apellido" placeholder="Tu apellido"></div>
+      <div class="field full"><label>Email *</label><input type="email" id="f-email" placeholder="tu@email.com"></div>
+      <div class="field"><label>Empresa</label><input type="text" id="f-empresa" placeholder="Opcional"></div>
+      <div class="field"><label>Rol actual</label><input type="text" id="f-rol" placeholder="Ej: Gerente, Jefe de área…"></div>
+    </div>
+
+    <div style="margin-top:24px;">
+      <div class="section-label">Momento del programa</div>
+      <div class="momento-grid">
+        <div class="momento-opt">
+          <input type="radio" name="momento" value="inicio" id="m-inicio" checked>
+          <label for="m-inicio">
+            <span class="m-title">Semana 0</span>
+            <span class="m-sub">Inicio del programa</span>
+          </label>
+        </div>
+        <div class="momento-opt">
+          <input type="radio" name="momento" value="cierre" id="m-cierre">
+          <label for="m-cierre">
+            <span class="m-title">Semana 7</span>
+            <span class="m-sub">Cierre del programa</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div id="err-0" class="error-msg">Por favor completá tu nombre, apellido y un email válido.</div>
+  </div>
+  <div class="nav" style="justify-content:flex-end;">
+    <button class="btn btn-primary" onclick="next()">Comenzar diagnóstico →</button>
+  </div>
+</div>
+
+<!-- ══ S1: MENTALIDAD ══ -->
+<div id="s1" class="screen">
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" style="width:20%"></div></div>
+    <div class="progress-label"><span>Dimensión 1 de 3</span><span>20%</span></div>
+  </div>
+  <div class="card">
+    <div class="dim-header">
+      <div class="dim-icon d1">🧭</div>
+      <div class="dim-meta"><h2>Mentalidad</h2><p>Tu postura frente al control, la confianza y el cambio</p></div>
+    </div>
+
+    <div class="question dim1">
+      <div class="question-num">Pregunta 1 de 16</div>
+      <div class="question-text">Me cuesta delegar decisiones importantes aunque sé que el equipo puede manejarlas.</div>
+      <div class="scale"><div class="scale-opt"><input type="radio" name="q1" value="1" id="q1a"><label for="q1a"><span class="num">1</span><span class="desc">Nunca</span></label></div><div class="scale-opt"><input type="radio" name="q1" value="2" id="q1b"><label for="q1b"><span class="num">2</span></label></div><div class="scale-opt"><input type="radio" name="q1" value="3" id="q1c"><label for="q1c"><span class="num">3</span></label></div><div class="scale-opt"><input type="radio" name="q1" value="4" id="q1d"><label for="q1d"><span class="num">4</span></label></div><div class="scale-opt"><input type="radio" name="q1" value="5" id="q1e"><label for="q1e"><span class="num">5</span><span class="desc">Siempre</span></label></div></div>
+    </div>
+
+    <div class="question dim1">
+      <div class="question-num">Pregunta 2 de 16</div>
+      <div class="question-text">Prefiero tener el control del proceso antes que compartirlo con mi equipo.</div>
+      <div class="scale"><div class="scale-opt"><input type="radio" name="q2" value="1" id="q2a"><label for="q2a"><span class="num">1</span><span class="desc">Nunca</span></label></div><div class="scale-opt"><input type="radio" name="q2" value="2" id="q2b"><label for="q2b"><span class="num">2</span></label></div><div class="scale-opt"><input type="radio" name="q2" value="3" id="q2c"><label for="q2c"><span class="num">3</span></label></div><div class="scale-opt"><input type="radio" name="q2" value="4" id="q2d"><label for="q2d"><span class="num">4</span></label></div><div class="scale-opt"><input type="radio" name="q2" value="5" id="q2e"><label for="q2e"><span class="num">5</span><span class="desc">Siempre</span></label></div></div>
+    </div>
+
+    <div class="question dim1">
+      <div class="question-num">Pregunta 3 de 16</div>
+      <div class="question-text">Me incomoda que el equipo tome caminos no planificados, aunque lleguen al resultado.</div>
+      <div class="scale"><div class="scale-opt"><input type="radio" name="q3" value="1" id="q3a"><label for="q3a"><span class="num">1</span><span class="desc">Nunca</span></label></div><div class="scale-opt"><input type="radio" name="q3" value="2" id="q3b"><label for="q3b"><span class="num">2</span></label></div><div class="scale-opt"><input type="radio" name="q3" value="3" id="q3c"><label for="q3c"><span class="num">3</span></label></div><div class="scale-opt"><input type="radio" name="q3" value="4" id="q3d"><label for="q3d"><span class="num">4</span></label></div><div class="scale-opt"><input type="radio" name="q3" value="5" id="q3e"><label for="q3e"><span class="num">5</span><span class="desc">Siempre</span></label></div></div>
+    </div>
+
+    <div class="question dim1">
+      <div class="question-num">Pregunta 4 de 16</div>
+      <div class="question-text">Me resulta natural adaptarme cuando cambian las condiciones o el contexto del trabajo.</div>
+      <div class="scale"><div class="scale-opt"><input type="radio" name="q4" value="1" id="q4a"><label for="q4a"><span class="num">1</span><span class="desc">Nunca</span></label></div><div class="scale-opt"><input type="radio" name="q4" value="2" id="q4b"><label for="q4b"><span class="num">2</span></label></div><div class="scale-opt"><input type="radio" name="q4" value="3" id="q4c"><label for="q4c"><span class="num">3</span></label></div><div class="scale-opt"><input type="radio" name="q4" value="4" id="q4d"><label for="q4d"><span class="num">4</span></label></div><div class="scale-opt"><input type="radio" name="q4" value="5" id="q4e"><label for="q4e"><span class="num">5</span><span class="desc">Siempre</span></label></div></div>
+    </div>
+
+    <div class="question dim1">
+      <div class="question-num">Pregunta 5 de 16</div>
+      <div class="question-text">Siento que si no superviso cada paso, las cosas pueden salir mal.</div>
+      <div class="scale"><div class="scale-opt"><input type="radio" name="q5" value="1" id="q5a"><label for="q5a"><span class="num">1</span><span class="desc">Nunca</span></label></div><div class="scale-opt"><input type="radio" name="q5" value="2" id="q5b"><label for="q5b"><span class="num">2</span></label></div><div class="scale-opt"><input type="radio" name="q5" value="3" id="q5c"><label for="q5c"><span class="num">3</span></label></div><div class="scale-opt"><input type="radio" name="q5" value="4" id="q5d"><label for="q5d"><span class="num">4</span></label></div><div class="scale-opt"><input type="radio" name="q5" value="5" id="q5e"><label for="q5e"><span class="num">5</span><span class="desc">Siempre</span></label></div></div>
+    </div>
+
+    <div id="err-1" class="error-msg">Respondé todas las preguntas de esta sección antes de continuar.</div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-ghost" onclick="prev()">← Volver</button>
+    <button class="btn btn-primary" onclick="next()">Continuar →</button>
+  </div>
+</div>
+
+<!-- ══ S2: HABILIDADES ══ -->
+<div id="s2" class="screen">
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" style="width:50%"></div></div>
+    <div class="progress-label"><span>Dimensión 2 de 3</span><span>50%</span></div>
+  </div>
+  <div class="card">
+    <div class="dim-header">
+      <div class="dim-icon d2">💬</div>
+      <div class="dim-meta"><h2>Habilidades conversacionales</h2><p>Comunicación, escucha, feedback y gestión emocional</p></div>
+    </div>
+
+    <div class="question dim2">
+      <div class="question-num">Pregunta 6 de 16</div>
+      <div class="question-text">Escucho con atención a mi equipo sin interrumpir ni apresurar la conversación.</div>
+      <div class="scale"><div class="scale-opt"><input type="radio" name="q6" value="1" id="q6a"><label for="q6a"><span class="num">1</span><span class="desc">Nunca</span></label></div><div class="scale-opt"><input type="radio" name="q6" value="2" id="q6b"><label for="q6b"><span class="num">2</span></label></div><div class="scale-opt"><input type="radio" name="q6" value="3" id="q6c"><label for="q6c"><span class="num">3</span></label></div><div class="scale-opt"><input type="radio" name="q6" value="4" id="q6d"><label for="q6d"><span class="num">4</span></label></div><div class="scale-opt"><input type="radio" name="q6" value="5" id="q6e"><label for="q6e"><span class="num">5</span><span class="desc">Siempre</span></label></div></div>
+    </div>
+
+    <div class="question dim2">
+      <div class="question-num">Pregunta 7 de 16</div>
+      <div class="question-text">Me resulta fácil dar feedback claro sobre el desempeño sin afectar el vínculo con la persona.</div>
+      <div class="scale"><div class="scale-opt"><input type="radio" name="q7" value="1" id="q7a"><label for="q7a"><span class="num">1</span><span class="desc">Nunca</span></label></div><div class="scale-opt"><input type="radio" name="q7" value="2" id="q7b"><label for="q7b"><span class="num">2</span></label></div><div class="scale-opt"><input type="radio" name="q7" value="3" id="q7c"><label for="q7c"><span class="num">3</span></label></div><div class="scale-opt"><input type="radio" name="q7" value="4" id="q7d"><label for="q7d"><span class="num">4</span></label></div><div class="scale-opt"><input type="radio" name="q7" value="5" id="q7e"><label for="q7e"><span class="num">5</span><span class="desc">Siempre</span></label></div></div>
+    </div>
+
+    <div class="question dim2">
+      <div class="question-num">Pregunta 8 de 16</div>
+      <div class="question-text">Sé expresar lo que necesito sin culpar ni hacer suposiciones sobre el otro.</div>
+      <div class="scale"><div class="scale-opt"><input type="radio" name="q8" value="1" id="q8a"><label for="q8a"><span class="num">1</span><span class="desc">Nunca</span></label></div><div class="scale-opt"><input type="radio" name="q8" value="2" id="q8b"><label for="q8b"><span class="num">2</span></label></div><div class="scale-opt"><input type="radio" name="q8" value="3" id="q8c"><label for="q8c"><span class="num">3</span></label></div><div class="scale-opt"><input type="radio" name="q8" value="4" id="q8d"><label for="q8d"><span class="num">4</span></label></div><div class="scale-opt"><input type="radio" name="q8" value="5" id="q8e"><label for="q8e"><span class="num">5</span><span class="desc">Siempre</span></label></div></div>
+    </div>
+
+    <div class="question dim2">
+      <div class="question-num">Pregunta 9 de 16</div>
+      <div class="question-text">Reconozco mis emociones antes de actuar impulsivamente en situaciones de tensión.</div>
+      <div class="scale"><div class="scale-opt"><input type="radio" name="q9" value="1" id="q9a"><label for="q9a"><span class="num">1</span><span class="desc">Nunca</span></label></div><div class="scale-opt"><input type="radio" name="q9" value="2" id="q9b"><label for="q9b"><span class="num">2</span></label></div><div class="scale-opt"><input type="radio" name="q9" value="3" id="q9c"><label for="q9c"><span class="num">3</span></label></div><div class="scale-opt"><input type="radio" name="q9" value="4" id="q9d"><label for="q9d"><span class="num">4</span></label></div><div class="scale-opt"><input type="radio" name="q9" value="5" id="q9e"><label for="q9e"><span class="num">5</span><span class="desc">Siempre</span></label></div></div>
+    </div>
+
+    <div class="question dim2">
+      <div class="question-num">Pregunta 10 de 16</div>
+      <div class="question-text">Puedo sostener conversaciones incómodas sin evitar el conflicto ni perder la calma.</div>
+      <div class="scale"><div class="scale-opt"><input type="radio" name="q10" value="1" id="q10a"><label for="q10a"><span class="num">1</span><span class="desc">Nunca</span></label></div><div class="scale-opt"><input type="radio" name="q10" value="2" id="q10b"><label for="q10b"><span class="num">2</span></label></div><div class="scale-opt"><input type="radio" name="q10" value="3" id="q10c"><label for="q10c"><span class="num">3</span></label></div><div class="scale-opt"><input type="radio" name="q10" value="4" id="q10d"><label for="q10d"><span class="num">4</span></label></div><div class="scale-opt"><input type="radio" name="q10" value="5" id="q10e"><label for="q10e"><span class="num">5</span><span class="desc">Siempre</span></label></div></div>
+    </div>
+
+    <div class="question dim2">
+      <div class="question-num">Pregunta 11 de 16</div>
+      <div class="question-text">Separo los hechos de mis interpretaciones antes de dar una respuesta o tomar una decisión.</div>
+      <div class="scale"><div class="scale-opt"><input type="radio" name="q11" value="1" id="q11a"><label for="q11a"><span class="num">1</span><span class="desc">Nunca</span></label></div><div class="scale-opt"><input type="radio" name="q11" value="2" id="q11b"><label for="q11b"><span class="num">2</span></label></div><div class="scale-opt"><input type="radio" name="q11" value="3" id="q11c"><label for="q11c"><span class="num">3</span></label></div><div class="scale-opt"><input type="radio" name="q11" value="4" id="q11d"><label for="q11d"><span class="num">4</span></label></div><div class="scale-opt"><input type="radio" name="q11" value="5" id="q11e"><label for="q11e"><span class="num">5</span><span class="desc">Siempre</span></label></div></div>
+    </div>
+
+    <div id="err-2" class="error-msg">Respondé todas las preguntas de esta sección antes de continuar.</div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-ghost" onclick="prev()">← Volver</button>
+    <button class="btn btn-primary" onclick="next()">Continuar →</button>
+  </div>
+</div>
+
+<!-- ══ S3: GESTIÓN ══ -->
+<div id="s3" class="screen">
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" style="width:78%"></div></div>
+    <div class="progress-label"><span>Dimensión 3 de 3</span><span>78%</span></div>
+  </div>
+  <div class="card">
+    <div class="dim-header">
+      <div class="dim-icon d3">🎯</div>
+      <div class="dim-meta"><h2>Gestión y foco</h2><p>Delegación, claridad de objetivos y organización del equipo</p></div>
+    </div>
+
+    <div class="question dim3">
+      <div class="question-num">Pregunta 12 de 16</div>
+      <div class="question-text">Mi equipo sabe con claridad qué se espera de cada uno y en qué están contribuyendo.</div>
+      <div class="scale"><div class="scale-opt"><input type="radio" name="q12" value="1" id="q12a"><label for="q12a"><span class="num">1</span><span class="desc">Nunca</span></label></div><div class="scale-opt"><input type="radio" name="q12" value="2" id="q12b"><label for="q12b"><span class="num">2</span></label></div><div class="scale-opt"><input type="radio" name="q12" value="3" id="q12c"><label for="q12c"><span class="num">3</span></label></div><div class="scale-opt"><input type="radio" name="q12" value="4" id="q12d"><label for="q12d"><span class="num">4</span></label></div><div class="scale-opt"><input type="radio" name="q12" value="5" id="q12e"><label for="q12e"><span class="num">5</span><span class="desc">Siempre</span></label></div></div>
+    </div>
+
+    <div class="question dim3">
+      <div class="question-num">Pregunta 13 de 16</div>
+      <div class="question-text">Me resulta fácil transformar una meta general en objetivos concretos y medibles para mi equipo.</div>
+      <div class="scale"><div class="scale-opt"><input type="radio" name="q13" value="1" id="q13a"><label for="q13a"><span class="num">1</span><span class="desc">Nunca</span></label></div><div class="scale-opt"><input type="radio" name="q13" value="2" id="q13b"><label for="q13b"><span class="num">2</span></label></div><div class="scale-opt"><input type="radio" name="q13" value="3" id="q13c"><label for="q13c"><span class="num">3</span></label></div><div class="scale-opt"><input type="radio" name="q13" value="4" id="q13d"><label for="q13d"><span class="num">4</span></label></div><div class="scale-opt"><input type="radio" name="q13" value="5" id="q13e"><label for="q13e"><span class="num">5</span><span class="desc">Siempre</span></label></div></div>
+    </div>
+
+    <div class="question dim3">
+      <div class="question-num">Pregunta 14 de 16</div>
+      <div class="question-text">Delego tareas con claridad sobre el resultado esperado, el nivel de autonomía y el seguimiento.</div>
+      <div class="scale"><div class="scale-opt"><input type="radio" name="q14" value="1" id="q14a"><label for="q14a"><span class="num">1</span><span class="desc">Nunca</span></label></div><div class="scale-opt"><input type="radio" name="q14" value="2" id="q14b"><label for="q14b"><span class="num">2</span></label></div><div class="scale-opt"><input type="radio" name="q14" value="3" id="q14c"><label for="q14c"><span class="num">3</span></label></div><div class="scale-opt"><input type="radio" name="q14" value="4" id="q14d"><label for="q14d"><span class="num">4</span></label></div><div class="scale-opt"><input type="radio" name="q14" value="5" id="q14e"><label for="q14e"><span class="num">5</span><span class="desc">Siempre</span></label></div></div>
+    </div>
+
+    <div class="question dim3">
+      <div class="question-num">Pregunta 15 de 16</div>
+      <div class="question-text">Sé identificar y sostener las prioridades estratégicas incluso cuando hay urgencias que distraen.</div>
+      <div class="scale"><div class="scale-opt"><input type="radio" name="q15" value="1" id="q15a"><label for="q15a"><span class="num">1</span><span class="desc">Nunca</span></label></div><div class="scale-opt"><input type="radio" name="q15" value="2" id="q15b"><label for="q15b"><span class="num">2</span></label></div><div class="scale-opt"><input type="radio" name="q15" value="3" id="q15c"><label for="q15c"><span class="num">3</span></label></div><div class="scale-opt"><input type="radio" name="q15" value="4" id="q15d"><label for="q15d"><span class="num">4</span></label></div><div class="scale-opt"><input type="radio" name="q15" value="5" id="q15e"><label for="q15e"><span class="num">5</span><span class="desc">Siempre</span></label></div></div>
+    </div>
+
+    <div class="question dim3">
+      <div class="question-num">Pregunta 16 de 16</div>
+      <div class="question-text">Tengo claridad sobre qué medir para saber que mi equipo está avanzando en la dirección correcta.</div>
+      <div class="scale"><div class="scale-opt"><input type="radio" name="q16" value="1" id="q16a"><label for="q16a"><span class="num">1</span><span class="desc">Nunca</span></label></div><div class="scale-opt"><input type="radio" name="q16" value="2" id="q16b"><label for="q16b"><span class="num">2</span></label></div><div class="scale-opt"><input type="radio" name="q16" value="3" id="q16c"><label for="q16c"><span class="num">3</span></label></div><div class="scale-opt"><input type="radio" name="q16" value="4" id="q16d"><label for="q16d"><span class="num">4</span></label></div><div class="scale-opt"><input type="radio" name="q16" value="5" id="q16e"><label for="q16e"><span class="num">5</span><span class="desc">Siempre</span></label></div></div>
+    </div>
+
+    <div id="err-3" class="error-msg">Respondé todas las preguntas de esta sección antes de continuar.</div>
+  </div>
+  <div class="nav">
+    <button class="btn btn-ghost" onclick="prev()">← Volver</button>
+    <button class="btn btn-violet" onclick="submit()">Ver mi diagnóstico →</button>
+  </div>
+</div>
+
+<!-- ══ LOADING ══ -->
+<div id="s-loading" class="screen">
+  <div class="loading-screen">
+    <div class="loading-ring"></div>
+    <h3>Analizando tu perfil</h3>
+    <p>Esto lleva unos segundos <span class="dots"><span>.</span><span>.</span><span>.</span></span></p>
+  </div>
+</div>
+
+<!-- ══ RESULTADO ══ -->
+<div id="s-result" class="screen">
+  <div class="result-top">
+    <div class="result-tag">Diagnóstico de Liderazgo · Levo by UP Company</div>
+    <div id="r-momento-tag"></div>
+    <div class="result-nombre" id="r-nombre"></div>
+    <div class="result-fecha" id="r-fecha"></div>
+    <div class="perfil-badge" id="r-perfil-badge"></div>
+    <div class="perfil-sub" id="r-perfil-sub"></div>
+  </div>
+
+  <div class="scores-row">
+    <div class="score-cell d1"><div class="sc-name">Mentalidad</div><div class="sc-val" id="v-d1">–</div><div class="sbar"><div class="sbar-fill" id="b-d1" style="width:0%"></div></div></div>
+    <div class="score-cell d2"><div class="sc-name">Habilidades conv.</div><div class="sc-val" id="v-d2">–</div><div class="sbar"><div class="sbar-fill" id="b-d2" style="width:0%"></div></div></div>
+    <div class="score-cell d3"><div class="sc-name">Gestión y foco</div><div class="sc-val" id="v-d3">–</div><div class="sbar"><div class="sbar-fill" id="b-d3" style="width:0%"></div></div></div>
+  </div>
+
+  <div class="result-body" id="r-content"></div>
+
+  <div class="notice" id="r-notice" style="display:none;">
+    ✉️ &nbsp;Enviamos este informe a <strong id="r-email"></strong>
+  </div>
+
+  <div class="nav no-print" style="justify-content:center; gap:12px; flex-wrap:wrap;">
+    <button class="btn btn-ghost" onclick="window.print()">Guardar como PDF</button>
+    <button class="btn btn-primary" onclick="location.reload()">Completar de nuevo</button>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+// ══════════════════════════════════════
+// CONFIGURACIÓN
+// ══════════════════════════════════════
+const API_KEY = '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';
+const WEBHOOK_URL = ''; // URL de Google Apps Script para el Sheet del Upper
+
+// ── Preguntas invertidas (alto = problema → se invierte para score positivo)
+const INVERT = [1, 2, 3, 5];
+
+// ── Perfiles
+const PERFILES = {
+  transicion: {
+    nombre: 'El Líder en Transición',
+    sub: 'Estás en un momento de cambio donde nada está del todo consolidado aún — y eso es una oportunidad.',
+    emoji: '🔄'
+  },
+  agilizador: {
+    nombre: 'El Agilizador',
+    sub: 'Movés al equipo con velocidad, pero te falta estructura para que los resultados se sostengan.',
+    emoji: '⚡'
+  },
+  diplomatico: {
+    nombre: 'El Diplomático',
+    sub: 'Cuidás los vínculos, pero evitás las conversaciones que realmente transforman.',
+    emoji: '🤝'
+  },
+  indispensable: {
+    nombre: 'El Indispensable',
+    sub: 'Liderás desde la expertise y el equipo depende de vos para avanzar — esa es la trampa.',
+    emoji: '🔑'
+  },
+  estratega: {
+    nombre: 'El Estratega en Formación',
+    sub: 'Tenés visión y claridad, pero te falta conectarla con el trabajo concreto del equipo.',
+    emoji: '🗺️'
+  },
+  operativo: {
+    nombre: 'El Operativo Funcional',
+    sub: 'Ejecutás muy bien, pero trabajás más dentro del sistema que sobre él.',
+    emoji: '⚙️'
+  },
+  evolutivo: {
+    nombre: 'El Líder Evolutivo',
+    sub: 'Integrás mentalidad, conversación y gestión — el horizonte del programa.',
+    emoji: '✦'
+  }
+};
+
+// ── Navegación
+let step = 0;
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function next() {
+  if (step === 0 && !validarDatos()) return;
+  if (step === 1 && !validarDim(1, [1,2,3,4,5])) return;
+  if (step === 2 && !validarDim(2, [6,7,8,9,10,11])) return;
+  if (step < 3) { step++; show('s' + step); }
+}
+function prev() {
+  if (step > 0) { step--; show('s' + step); }
+}
+
+// ── Validaciones
+function v(id) { return document.getElementById(id).value.trim(); }
+function validarDatos() {
+  const ok = v('f-nombre') && v('f-apellido') && v('f-email') && v('f-email').includes('@');
+  document.getElementById('err-0').style.display = ok ? 'none' : 'block';
+  return ok;
+}
+function validarDim(num, qs) {
+  const ok = qs.every(q => document.querySelector(`input[name="q${q}"]:checked`));
+  document.getElementById('err-' + num).style.display = ok ? 'none' : 'block';
+  return ok;
+}
+
+// ── Puntajes
+function getScore(q) {
+  const raw = parseInt(document.querySelector(`input[name="q${q}"]:checked`)?.value || 0);
+  return INVERT.includes(q) ? 6 - raw : raw;
+}
+function calcScores() {
+  const d1 = [1,2,3,4,5].reduce((a,q) => a + getScore(q), 0) / 5;
+  const d2 = [6,7,8,9,10,11].reduce((a,q) => a + getScore(q), 0) / 6;
+  const d3 = [12,13,14,15,16].reduce((a,q) => a + getScore(q), 0) / 5;
+  return { d1: +d1.toFixed(1), d2: +d2.toFixed(1), d3: +d3.toFixed(1) };
+}
+
+// ── Clasificar perfil
+function clasificar(s) {
+  const { d1, d2, d3 } = s;
+  const max = Math.max(d1, d2, d3);
+  const min = Math.min(d1, d2, d3);
+  const diff = max - min;
+
+  // Evolutivo: todo alto
+  if (d1 >= 3.8 && d2 >= 3.8 && d3 >= 3.8) return 'evolutivo';
+  // Transición: puntajes muy parejos
+  if (diff < 0.6) return 'transicion';
+
+  // Patrones por dimensión dominante/baja
+  const alto = (x) => x >= 3.5;
+  const bajo = (x) => x <= 2.8;
+
+  if (alto(d1) && !alto(d2) && bajo(d3)) return 'agilizador';
+  if (!alto(d2) && bajo(d2)) return 'diplomatico';
+  if (bajo(d1) && bajo(d3)) return 'indispensable';
+  if (alto(d1) && !alto(d3)) return 'estratega';
+  if (alto(d3) && !alto(d1)) return 'operativo';
+
+  // Fallback por dimensión más baja
+  if (min === d2) return 'diplomatico';
+  if (min === d3) return 'agilizador';
+  return 'indispensable';
+}
+
+// ── Submit
+async function submit() {
+  if (!validarDim(3, [12,13,14,15,16])) return;
+
+  const nombre   = v('f-nombre');
+  const apellido = v('f-apellido');
+  const email    = v('f-email');
+  const empresa  = v('f-empresa') || 'No especificada';
+  const rol      = v('f-rol') || 'Líder';
+  const momento  = document.querySelector('input[name="momento"]:checked').value;
+  const scores   = calcScores();
+  const perfil   = clasificar(scores);
+
+  show('s-loading');
+
+  // Webhook al Sheet del Upper
+  if (WEBHOOK_URL) {
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nombre, apellido, email, empresa, rol,
+        momento, perfil,
+        mentalidad: scores.d1,
+        habilidades: scores.d2,
+        gestion: scores.d3,
+        fecha: new Date().toISOString()
+      })
+    }).catch(() => {});
+  }
+
+  try {
+    const html = await generarInforme(nombre, apellido, empresa, rol, momento, scores, perfil);
+    mostrarResultado(nombre, apellido, email, momento, scores, perfil, html);
+  } catch(e) {
+    console.error(e);
+    mostrarResultado(nombre, apellido, email, momento, scores, perfil, fallback(nombre, scores, perfil));
+  }
+}
+
+// ── Claude API
+async function generarInforme(nombre, apellido, empresa, rol, momento, s, perfilKey) {
+  const p = PERFILES[perfilKey];
+  const momentoTexto = momento === 'inicio' ? 'inicio (Semana 0)' : 'cierre (Semana 7)';
+  const momentoContexto = momento === 'inicio'
+    ? 'Esta es la medición inicial. El programa completo queda por delante.'
+    : 'Esta es la medición de cierre. La persona acaba de completar 8 semanas de entrenamiento en Liderazgo Evolutivo.';
+
+  const prompt = `Sos coach experta en liderazgo y desarrollo de habilidades de UP Company, empresa argentina de consultoría y formación.
+Analizá este diagnóstico individual y generá un informe en HTML usando SOLO estas etiquetas: <h3>, <p>, <ul>, <li>, <strong>. Sin markdown, sin otros tags, sin backticks.
+
+DATOS:
+- Nombre: ${nombre} ${apellido}
+- Empresa: ${empresa}
+- Rol: ${rol}
+- Programa: Liderazgo Evolutivo (Levo) — UP Company
+- Momento: ${momentoTexto}
+- ${momentoContexto}
+
+PERFIL ASIGNADO: ${p.nombre}
+Descripción: ${p.sub}
+
+PUNTAJES (escala 1–5, promedio por dimensión):
+- Mentalidad (control vs confianza, adaptabilidad): ${s.d1}/5
+- Habilidades conversacionales (escucha, feedback, comunicación asertiva, gestión emocional): ${s.d2}/5
+- Gestión y foco (delegación, claridad de objetivos, organización del equipo): ${s.d3}/5
+
+VOZ UP COMPANY: directa, sin eufemismos, humana, sin clichés motivacionales. Nombra el problema sin suavizarlo. Da recomendaciones concretas y aplicables. Dirigite a ${nombre} en segunda persona, con voseo rioplatense.
+
+ESTRUCTURA DEL INFORME (en este orden exacto):
+
+<h3>Resumen ejecutivo</h3>
+3 líneas máximo. Momento actual de ${nombre}, 1 fortaleza principal con su puntaje entre paréntesis, 1 foco de mejora clave con su puntaje. Directo y concreto.
+
+<h3>Tu perfil hoy: ${p.nombre}</h3>
+Describí comportamientos reales de este perfil en el contexto de ${nombre}. Cómo se comporta, qué patrones tiene, cómo impacta en su equipo. No describas números, describí conductas. Si hay diferencias grandes entre dimensiones, nombralas como desequilibrio. 3-4 párrafos.
+
+<h3>Fortalezas principales</h3>
+2 o 3 fortalezas basadas en los puntajes más altos. Para cada una: nombre en negrita, qué significa en la práctica, qué impacto positivo genera en el equipo.
+
+<h3>Oportunidades de mejora</h3>
+2 o 3 oportunidades basadas en los puntajes más bajos. Para cada una: nombre en negrita, el riesgo o costo actual, cómo se manifiesta en el día a día. Sin lenguaje suave — nombra el problema real.
+
+<h3>Recomendaciones accionables</h3>
+3 a 5 recomendaciones. Para cada una: qué hacer en negrita, en qué situaciones aplicarlo, cómo empezar esta semana.
+
+<h3>Micro ejercicios para esta semana</h3>
+2 o 3 ejercicios. Para cada uno: situación concreta, acción específica, duración. Simples y aplicables al trabajo real. Sin jerga técnica.
+
+<h3>Tu foco en Liderazgo Evolutivo</h3>
+${momento === 'inicio'
+  ? `2-3 líneas sobre en qué enfocarse durante las 8 semanas del programa. Qué módulos son más relevantes para ${p.nombre}.`
+  : `2-3 líneas sobre qué se transformó en estas 8 semanas según el perfil y los puntajes. Qué sostener y qué seguir trabajando en los próximos 90 días.`}
+
+<h3>Para arrancar</h3>
+Cierre de 3-4 líneas. Motivador, honesto, en la voz de UP. Nombra a ${nombre} y menciona ${empresa} si fue especificada. Sin frases hechas.`;
+
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': API_KEY,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 2500,
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+  if (!res.ok) throw new Error('API ' + res.status);
+  const data = await res.json();
+  return data.content[0].text;
+}
+
+// ── Fallback
+function fallback(nombre, s, perfilKey) {
+  const p = PERFILES[perfilKey];
+  const dims = [
+    { name: 'Mentalidad', score: s.d1 },
+    { name: 'Habilidades conversacionales', score: s.d2 },
+    { name: 'Gestión y foco', score: s.d3 }
+  ];
+  const max = dims.reduce((a,b) => b.score > a.score ? b : a);
+  const min = dims.reduce((a,b) => b.score < a.score ? b : a);
+  return `<h3>Tu perfil: ${p.nombre}</h3>
+<p>${p.sub}</p>
+<h3>Tus puntajes</h3>
+<p>Mentalidad: <strong>${s.d1}/5</strong> · Habilidades conversacionales: <strong>${s.d2}/5</strong> · Gestión y foco: <strong>${s.d3}/5</strong></p>
+<h3>Punto de partida</h3>
+<p>Tu mayor fortaleza está en <strong>${max.name}</strong> (${max.score}/5). Tu mayor oportunidad de crecimiento está en <strong>${min.name}</strong> (${min.score}/5).</p>
+<h3>Para arrancar</h3>
+<p>${nombre}, este diagnóstico es tu línea de base. El programa Liderazgo Evolutivo está diseñado para trabajar exactamente en estas áreas. El cambio que viene es tuyo.</p>`;
+}
+
+// ── Mostrar resultado
+function mostrarResultado(nombre, apellido, email, momento, s, perfilKey, html) {
+  const p = PERFILES[perfilKey];
+  document.getElementById('r-nombre').textContent = nombre + ' ' + apellido;
+  document.getElementById('r-fecha').textContent = new Date().toLocaleDateString('es-AR', { day:'numeric', month:'long', year:'numeric' });
+
+  // Tag de momento
+  const tag = document.getElementById('r-momento-tag');
+  tag.className = 'momento-tag ' + momento;
+  tag.textContent = momento === 'inicio' ? '📍 Semana 0 — Diagnóstico inicial' : '🏁 Semana 7 — Diagnóstico de cierre';
+
+  document.getElementById('r-perfil-badge').textContent = p.emoji + '  ' + p.nombre;
+  document.getElementById('r-perfil-sub').textContent = p.sub;
+
+  document.getElementById('v-d1').textContent = s.d1;
+  document.getElementById('v-d2').textContent = s.d2;
+  document.getElementById('v-d3').textContent = s.d3;
+
+  setTimeout(() => {
+    document.getElementById('b-d1').style.width = (s.d1/5*100) + '%';
+    document.getElementById('b-d2').style.width = (s.d2/5*100) + '%';
+    document.getElementById('b-d3').style.width = (s.d3/5*100) + '%';
+  }, 300);
+
+  document.getElementById('r-content').innerHTML = html;
+  document.getElementById('r-email').textContent = email;
+  document.getElementById('r-notice').style.display = 'flex';
+
+  show('s-result');
+}
+
+show('s0');
+</script>
+</body>
+</html>
